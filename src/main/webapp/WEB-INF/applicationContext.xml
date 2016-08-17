@@ -3,6 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+    <!-- Using Spring with JSF: bean id will be  ManagedBean-->
     <bean id="userData" class="test.UserData" scope="session">
         <property name="message" value="Hello To Spring World" />        
     </bean>      
