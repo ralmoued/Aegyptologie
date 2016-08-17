@@ -60,6 +60,11 @@
             <version>4.3.2.RELEASE</version>
         </dependency> 
         <!-- Spring security framework -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.1.2.RELEASE</version>
+        </dependency>
 
         <!-- Primefaces -->
         <dependency>
