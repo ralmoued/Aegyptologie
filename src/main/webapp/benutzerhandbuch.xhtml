@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeManger.language}">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>#{sprache.userGuide}</title>
+            <link rel="stylesheet"
+                  href="JSF-Styles.css" type="text/css"/> 
+        </h:head>
+        <h:body>
+            #{pdf.downloadPDF(sprache.language)}
+
+        </h:body>
+    </f:view>
+</html>

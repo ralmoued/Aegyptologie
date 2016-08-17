@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Capital for the countries</title>
+        <h:outputStylesheet library="css" name="test-Styles.css"/>
+        <h:outputScript library="js" name="javascript.js" />
+    </h:head>
+    <h:body>
+        <h:form id="radioButtoncoloring">
+            <h:selectOneRadio value="#{color.color}" valueChangeListener="#{color.findColor}" 
+                              id="myRadio" layout="pageDirection">
+                <f:selectItem itemValue="Red" itemLabel="Color1 - Red"/>
+   			<f:selectItem itemValue="Green" itemLabel="Color1 - Green" />
+   			<f:selectItem itemValue="Blue" itemLabel="Color1 - Blue" />
+   		</h:selectOneRadio>
+           <br/>
+           <h:commandButton value="Find color" /> <br/>
+            <h:outputText value="coosed color is #{color.color}" rendered="#{color.color ne null}" 
+                          styleClass="#{color.color eq 'Red color' ? 'redColor' : color.color eq 'Green color' ? 'greenColor' : 'blueColor'}"/>
+            
+            <br/><br/>
+            <h:inputText styleClass="#{facesContext.validationFailed  ? 'invalid' : ''}" required="true"/>
+            <h:commandButton value="click" type="submit"/>
+          
+            </h:form>
+    </h:body>
+</html>

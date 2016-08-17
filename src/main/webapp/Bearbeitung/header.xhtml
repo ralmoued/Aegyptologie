@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Header</title>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+    </h:head>
+    <body>
+        <h:form id="edit_header" style="margin-left: 50px; margin-right: 50px;
+                margin-bottom: 50px; position: absolute ;top: 20px;">
+
+            <p:commandLink action="/index?faces-redirect=true" id="home" value="Startseite" style="margin-right:20px;"/>
+            <p:commandLink action="editieren?faces-redirect=true" id="edit" value="Bearbeitungsseite" style="margin-right:20px;"/>
+            <p:commandLink action="EinleitungstextEditieren?faces-redirect=true" id="intro" value="Einleitungstext" style="margin-right:20px;"/>
+            <p:commandLink action="mitarbeiter?faces-redirect=true" value="Mitarbeiter" id="employee" style="margin-right:20px;"/>
+            <p:commandLink action="impressumEditieren?faces-redirect=true" value="Impressum" id="about" style="margin-right:20px;"/>
+            <p:commandLink action="upload?faces-redirect=true" value="Benutzerhandbuch" id="upload" style="margin-right:20px;"/>
+            <h:outputText value="Hallo #{login.benutzername}" escape="false" style="position: absolute; right: 180px; color: grey; font-size: 15px"/>
+            <p:commandLink action="#{login.abmelden}" id="logout" value="Abmelden" style="position: absolute; right: 60px;"/>
+
+            <div style="width:1100px; border-width:1.5px; border-color:black; 
+                 border-style:solid; margin-top: 10px"/>
+         </h:form>
+    </body>
+</html>

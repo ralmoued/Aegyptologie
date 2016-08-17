@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xml:lang="#{localeManger.language}" dir="#{localeManger.dir}"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeManger.language}">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>#{sprache.employees}</title>
+            <h:outputStylesheet library="css" name="JSF-Styles.css"/>
+            <h:outputStylesheet library="css" name="reset-Styles.css"/>
+        </h:head>
+        <h:body>
+            <div id="page">
+                <div id="header-container">
+                    <div id="header">
+                        <div id="language_switcher">
+                            <ui:insert name="language_switcher">
+                                <ui:include src="language_switcher.xhtml" />
+                            </ui:insert>
+                        </div>
+                        <div id="searchBar">
+                            <ui:insert name="searchBar">
+                                <ui:include src="searchBar.xhtml" />
+                            </ui:insert>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-container">
+                    <div id="content">
+                        <h:form>
+                            <font size="+5" dir="left">
+                                #{sprache.employees}
+                            </font>
+                            <div id="separator"/>
+
+                            <ui:repeat var="mit" value="#{mitarbeiter.mitarbList}" varStatus="status">
+                                <ul>
+                                    <li>
+                                        <h:commandLink value="#{mit.titel} #{mit.vorname} #{mit.nachname}" action="#{mitarbeiter.setEinzelheit(mit.id, mit.vorname, mit.nachname)}" 
+                                                       id="einzelmitarbeiter" style="color: black; font-size: large"/>
+                                        <br></br>
+                                        
+
+                                        <h:outputText value="#{sprache.email} #{mit.email}&lt;br /&gt;" rendered="#{!empty mit.email}" escape="false"/>
+
+                                        <h:outputText value="#{sprache.phone} #{mit.telephon}&lt;br /&gt;" rendered="#{!empty mit.telephon}" escape="false"/>
+
+                                        <h:outputText value="#{sprache.empDuration} #{mit.beaschaeftigungsDauer}&lt;br /&gt;" rendered="#{!empty mit.beaschaeftigungsDauer}" escape="false"/>
+                                        
+                                    </li>
+                                </ul>
+                            </ui:repeat>
+                        </h:form>
+                        <br></br>
+                        <br></br>
+                    </div>
+                </div>
+
+                <div id="footer-container">
+                    <div id="footer">
+                        <ui:insert name="footer">
+                            <ui:include src="footer.xhtml" />
+                        </ui:insert>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+    </f:view>
+</html>

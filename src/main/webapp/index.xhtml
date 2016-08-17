@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="#{localeManger.language}" dir="#{localeManger.dir}"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+        <f:viewParam name="localeLanguage" value="55"/>
+    </f:metadata>
+    <f:view locale="#{localeManger.language}">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>Index</title>
+            <h:outputStylesheet library="css" name="reset-Styles.css"  />
+            <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+        </h:head>
+        <h:body>
+            <div id="page">
+                <div id="header-container">
+                    <div id="header">
+                        <div id="language_switcher">
+                            <ui:insert name="language_switcher">
+                                <ui:include src="language_switcher.xhtml" />
+                            </ui:insert>
+                        </div>
+                        <div id="searchBar">
+                            <ui:insert name="searchBar">
+                                <ui:include src="searchBar.xhtml" />
+                            </ui:insert>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="content-container">
+                    <div id="menu">
+                        <ui:insert name="menu">
+                            <ui:include src="menu.xhtml" />
+                        </ui:insert>
+                    </div>
+                    <div id="logIn">
+                        <ui:insert name="logIn">
+                            <ui:include src="logIn.xhtml" />
+                        </ui:insert>
+                    </div>
+                    <div id="introduction">
+                        <ui:insert name="introduction">
+                            <ui:include src="introduction.xhtml" />
+                        </ui:insert>
+                    </div>
+                </div>
+
+                <div id="footer-container">
+                    <div id="footer">
+                        <ui:insert name="footer">
+                            <ui:include src="footer.xhtml" />
+                        </ui:insert>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+    </f:view>
+</html>

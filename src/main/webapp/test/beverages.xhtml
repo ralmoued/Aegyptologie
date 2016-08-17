@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Beverages</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputText value="Select a beverage: " />
+            <h:selectOneMenu value="#{beverage.name}"
+                             valueChangeListener="#{beverage.beverageSelected}"
+                             onchange="submit()">
+                <f:selectItem itemLabel="---" itemValue="---"/>
+                <f:selectItem itemLabel="Tea" itemValue="tea" />
+                <f:selectItem itemLabel="Coffee" itemValue="coffee" />
+                <f:selectItem itemLabel="Coca-Cola" itemValue="cocacola" />
+            </h:selectOneMenu> <br/><br/>
+            <h:outputText value="You will have to pay: #{beverage.price} USD"
+                          rendered="#{beverage.price ne null}"/>
+        </h:form>
+    </h:body>
+</html>

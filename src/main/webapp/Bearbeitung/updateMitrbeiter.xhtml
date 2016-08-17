@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Aktualisierung</title>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+    </h:head>
+    <h:body>
+        <ui:include src="header.xhtml"/>
+
+        <center>
+            <h:form id="update" style="margin-top: 80px">
+                <h1>Mitarbeiter Editieren</h1>
+                <table>
+                    <tr>
+                        <td>Vorname:</td>
+                        <td><p:inputText id="firstName" required="true"
+                                         label="firstName" size="23" value="#{mitarbeiter.vorname}" 
+                                         requiredMessage=" Vorname ist erforderlich"
+                                         validatorMessage=" Vorname soll mindestens 3 Zeichen lang sein">
+                                <f:validateRegex  for="firstName" pattern="((?=.*[a-zA-Z]).{3,})"/>
+                            </p:inputText>
+                            <p:watermark for="firstName" value="Vorname *" />
+                            <h:message for="firstName" style="color:red" /></td>
+                    </tr>
+
+                    <tr>
+                        <td>Nachname:</td>
+                        <td> <p:inputText id="lastName" required="true" 
+                                          label="lastName" size="23" value="#{mitarbeiter.nachname}" 
+                                          requiredMessage=" Nachname ist erforderlich"
+                                          validatorMessage=" Nachname soll mindestens 3 Zeichen lang sein">
+                                <f:validateRegex  for="lastName" pattern="((?=.*[a-zA-Z]).{3,})"/>
+                            </p:inputText>
+                            <p:watermark for="lastName" value="Nachname *" />
+                            <h:message for="lastName" infoStyle="color: green" errorStyle="color:red" /><br/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Titel:</td>
+                        <td><p:selectOneMenu value="#{mitarbeiter.titel}"
+                                             label="titel" id="titel" required="false">
+
+                                <f:selectItem itemValue="" itemLabel="titel" />
+                                <f:selectItem itemValue="Prof." itemLabel="Prof." />
+                                <f:selectItem itemValue="Dr." itemLabel="Dr."/>
+                            </p:selectOneMenu></td>
+                    </tr>
+
+                    <tr>
+                        <td> E-mail:</td>
+                        <td><p:inputText value="#{mitarbeiter.email}" id="email" 
+                                         size="50" required="false" label="email"
+                                         requiredMessage=" E-Mail-Adresse ist erforderlich"
+                                         validatorMessage=" Bitte geben Sie eine gültige E-Mail ein">
+                            </p:inputText>
+                            <p:watermark for="email" value="E-mail *" />
+                            <h:message for="email" style="color:red" /></td>
+                    </tr>
+
+                    <tr> 
+                        <td>Phone:</td>
+                        <td><p:inputText value="#{mitarbeiter.telephon}" id="phone"/><br/></td>
+                    </tr>
+
+                    <tr> 
+                        <td>Beschäftigungsdauer:</td>
+                        <td><p:inputText value="#{mitarbeiter.beaschaeftigungsDauer}" id="dauer"/><br/></td>
+                    </tr>
+
+                    <tr> 
+                        <td>Aktivitäten:</td>
+                        <td><p:editor id="editor" value="#{mitarbeiter.kurzLebenslauf}" width="600"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><p:commandButton value="Aktualisieren" action="#{mitarbeiter.update}"  id="update"
+                                             actionListener="#{mitarbeiter.updateMsg()}"  update="@(form)" style="width:170px;margin:5px"/> 
+                            <p:commandButton value="Reset" update="@form" process="@this" id="reset"
+                                             actionListener="#{mitarbeiter.reset}" style="width:170px"/>
+                        </td>
+                    </tr>
+                </table>
+                <p:messages id="messages" globalOnly="true" showDetail="true" autoUpdate="true" closable="true" />
+            </h:form>
+        </center>
+
+    </h:body>
+</html>

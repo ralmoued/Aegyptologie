@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Menu</title> 
+    </h:head>
+    <h:body>
+        <h:form>  
+            <p:growl id="messages" showDetail="true"/>
+            <p:menu style="background-color: #D2B48C; border-radius: 10px; border-left-color: red;
+                    border-style: dashed; border-width: 2px; margin: auto;">
+
+                <p:menuitem value="Save" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" 
+                            disabled="false" style=" color: black; background-color: white;
+                            border-color: blueviolet; border-radius: 20px; border-width: 2px"/>
+                <p:menuitem value="Update" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"
+                            style=" border-style: double; border-color: black; border-width: 5px;"/>
+
+                <p:menuitem value="Close" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"
+                            style=""/>
+                <p:menuitem value="Home"  icon="ui-icon-home"/>
+                <p:menuitem value="External" url="http://jqueryui.com/themeroller/" icon="ui-icon-extlink"/>
+                <p:menuitem value="Internal"  url="http://www.primefaces.org" icon="ui-icon-link"/>
+                <p:menuitem value="Delete"  icon="ui-icon-trash"/>
+                <p:menuitem value="Search"  icon="ui-icon-search"/>
+                <p:menuitem value="Staff"  icon="ui-icon-star"/>
+                <p:menuitem value="Contact"  icon="ui-icon-mail-closed"/>
+                <p:menuitem value="About"  icon="ui-icon-heart"/>
+                <p:menuitem value="User guide"  icon="ui-icon-wrench"/>
+
+                <p:submenu label="Ajax" ></p:submenu>
+            </p:menu>
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,124 @@
+BODY { background-color: #FDF5E6 }
+A:hover { color: red }
+H1 { color: #440000;
+     text-align: center;
+     font-family: Arial Black, Arial, Helvetica, sans-serif
+}
+H2 { color: #440000;
+     font-family: Arial, Helvetica, sans-serif
+}
+H3 { color: #440000;
+     font-family: Arial, Helvetica, sans-serif
+}
+UL { margin-top: 0;
+     border-top-width: 0;
+     padding-top: 0
+}
+DT { font-weight: bold;
+}
+PRE { font-size: 105%;
+}
+CODE { font-size: 105%; 
+}
+.TOC { font-size: 90%;
+       font-weight: bold;
+       font-family: Arial, Helvetica, sans-serif
+}
+TH.COLORED { background-color: #FFAD00
+}
+TR.COLORED { background-color: #FFAD00
+}
+TH.TITLE   { background-color: #EF8429;
+             font-size: 28px;
+             font-family: Arial, Helvetica, sans-serif;
+}
+
+a:link { text-decoration:none; color: grey; font-size: 15px }
+a:visited { text-decoration:line-through; }
+a:hover { text-decoration:underline; }
+a:active { text-decoration:underline; }
+a:focus { text-decoration:black; }
+
+#div {
+    border-width:1.5px; 
+    border-color:black; 
+    border-radius: 20px;
+    border-style:solid;
+    margin-top: 20px;
+    margin-bottom: 50px; 
+    margin-left: 50px; 
+    margin-right: 50px; 
+    background-color: #D2B48C;
+    overflow: hidden;   
+}
+
+
+#footer {
+    margin-left: 50px; 
+    margin-right: 50px; 
+    margin-top: 200px;
+    position:absolute; 
+    bottom: 20px;
+    padding-top: 100px;
+}
+
+#einzelmitarbeiter {
+    min-width:265px;
+    margin-bottom: 20px; 
+    margin-top: 20px;
+    margin-left: 50px; 
+    margin-right: 50px;
+    border:1px solid;
+    border-width:1.5px;
+    border-radius:20px;
+    border-color:black;
+    background-color:#D2B48C;
+    overflow:hidden;
+}
+#einzelmitarbeiter img {
+    float: right; 
+    width:170px;
+    margin-left:20px;
+    margin-bottom:20px;
+}
+
+#separator {
+    border-width:1.5px; 
+    border-color:black; 
+    border-style:solid; 
+    margin-bottom: 20px; 
+    margin-top: 20px
+}
+
+.output100 {
+    background-color: red;
+    color: white;
+}  
+
+    .isValid {
+
+}
+
+    .invalid {
+    background-color: red;
+    color: white;
+}
+
+    .redColor {
+    background-color: red;
+    color: white;
+}
+
+    .greenColor {
+    background-color: green;
+    color: white;
+}
+
+    .blueColor {
+    background-color: blue;
+    color: white;
+}
+
+.noColor{
+    
+}

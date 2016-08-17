@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Mitarbeiter</title>
+        <link rel="stylesheet"
+              href="../JSF-Styles.css" type="text/css"/> 
+    </h:head>
+    <h:body>
+        <ui:include src="header.xhtml"/>
+
+        <h:form id="mitarbeiter" style="margin-left: 50px; margin-right: 50px; margin-top: 80px;
+                margin-bottom: 20px;">
+
+            <h1>Mitarbeiter Informationen </h1>
+            <center>
+                <p:dataTable value="#{mitarbeiter.mitarbList}" var="mit" resizableColumns="true">
+
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column rowspan="1" headerText="Vorname" style="width: 80px"/>
+                            <p:column rowspan="1" headerText="Nachname" style="width: 120px"/>
+                            <p:column rowspan="1" headerText="Titel" style="width: 35px"/>
+                            <p:column rowspan="1" headerText="Email" style="width: 160px" />
+                            <p:column rowspan="1" headerText="Telephon" style="width: 100px" />
+                            <p:column rowspan="1" headerText="Datum" style="width: 80px" />
+                            <p:column colspan="3" headerText="Bearbeiten" id="editieren" style="width: 335px"/>
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column>
+                        <f:facet name="header">Vorname</f:facet>
+                        <h:outputText value="#{mit.vorname}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Nachname</f:facet>
+                        <h:outputText value="#{mit.nachname}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Titel</f:facet>
+                        <h:outputText value="#{mit.titel}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Email</f:facet>
+                        <h:outputText value="#{mit.email}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Telephone</f:facet>
+                        <h:outputText value="#{mit.telephon}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Datum</f:facet>
+                        <h:outputText value="#{mit.beaschaeftigungsDauer}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Bearbeiten</f:facet>
+                        <p:commandButton value="Editieren" id="edit" style="width: 105px"
+                                         action="#{mitarbeiter.setAktualisierung(mit.id)}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Delete</f:facet>
+                        <p:commandButton value="Löschen" id="del" style="width: 105px"
+                                         action="#{mitarbeiter.deleteAction(mit.id)}" 
+                                         actionListener="#{mitarbeiter.delMsg()}" update="@form" />
+                    </p:column> 
+                    
+                    <p:column>
+                        <f:facet name="header">Bearbeiten</f:facet>
+                        <p:commandButton value="Details" id="details"
+                                         action="#{mitarbeiter.setMitarbeiterDetails(mit.id, mit.vorname, mit.nachname)}"/>
+                    </p:column>
+
+                    
+
+                </p:dataTable>
+            </center>
+
+            <table>
+                <br></br>
+                <tr>
+                    <td><p:commandButton value="Neuer Mitarbeiter" id="neu"
+                                         action="#{mitarbeiter.neuerMitabeiter()}" style="width:190px;"/></td>
+                </tr>
+            </table>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+        </h:form>
+    </h:body>
+
+</html>

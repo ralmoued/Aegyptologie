@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+ 
+    <display-name>Altägyptische Wörterbücher im Verbund</display-name>
+ 
+    <!-- Change to "Production" when you are ready to deploy -->
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+ 
+    <!-- Welcome page -->
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+
+    <!-- listener -->
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
+    <!-- Add Support for Spring -->
+    <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!-- JSF mapping -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+ 
+    <!-- Map these files with JSF -->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+  
+    <!-- declare the PrimeFaces filter in order to enable file uploading -->  
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>
+            org.primefaces.webapp.filter.FileUploadFilter
+        </filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    
+    <!-- Login filter -->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>de.unileipzig.wirote.control.LoginFilter</filter-class>
+    </filter>
+    <!-- Set the login filter to secure all the pages in the /Bearbeitung/* path of the application -->
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/Bearbeitung/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
+    <!-- Cache filter -->
+    <filter>
+        <display-name>NoCacheFilter</display-name>
+        <filter-name>NoCacheFilter</filter-name>
+        <filter-class>de.unileipzig.wirote.control.NoCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>NoCacheFilter</filter-name>
+        <url-pattern>/Bearbeitung/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <session-config>
+        <session-timeout>25</session-timeout>
+    </session-config>
+
+    <!-- Error Handlung -->
+    <!--    <error-page> -->
+    <!--        <exception-type>javax.faces.application.ViewExpiredException</exception-type> -->
+    <!--        <location>/error/sessionexpired.xhtml</location> -->
+    <!--    </error-page> -->     
+    <!--     <error-page> -->
+    <!--         <error-code>404</error-code> -->
+    <!--         <location>/error/404ErrorPage.xhtml</location> -->
+    <!--     </error-page> -->
+    <!--     <error-page> -->
+    <!--         <error-code>500</error-code> -->
+    <!--         <location>/error/500ErrorPage.xhtml</location> -->
+    <!--     </error-page> -->
+    <!--     <error-page> -->
+    <!--         <error-code>503</error-code> -->
+    <!--         <location>/error/503ErrorPage.xhtml</location> -->
+    <!--     </error-page>  -->
+
+    <!-- security-constraint 
+    <security-constraint>
+        <display-name>A Configuration Security Constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+    -->
+            <!-- Define the context-relative URL(s) to be protected
+            In dem Fall wollen wir einfach unsere index.html schützen.
+           
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>authenticatedUser</role-name>
+        </auth-constraint>
+    </security-constraint>
+ 
+  <login-config>
+      <auth-method>BASIC</auth-method>
+      <realm-name>Bitte Benutzername und Passwort geben</realm-name>
+  </login-config>
+    -->
+</web-app>

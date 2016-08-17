@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+        <title>JSF tutorial</title>
+    </h:head>
+    <h:body>
+        <h2>Ajax Example</h2>
+        <h:form>
+            <h:inputText id="inputName" value="#{userAjaxData.name}"></h:inputText>
+            <h:commandButton value="Show Message">
+                <f:ajax execute="inputName" render="outputMessage" />
+            </h:commandButton>
+            <h2><h:outputText id="outputMessage"
+                              value="#{userAjaxData.welcomeMessage !=null ?
+                                       userAjaxData.welcomeMessage : ''}"/></h2>
+        </h:form>
+
+        <h:form>
+            <h:commandButton value="Click">
+                <f:ajax render="message" listener="#{userAjaxData.handleEvent}" />
+            </h:commandButton>
+            <h:outputText id="message" value="#{userAjaxData.name}" />
+        </h:form>
+
+        <h:form>
+            <h:commandButton id="day" value="Day">
+                <f:ajax render="light" />
+            </h:commandButton>
+            <h:commandButton id="noon" value="Noon">
+                <f:ajax render="warm" />
+            </h:commandButton>
+            <h:commandButton id="night" value="Night">
+                <f:ajax  render="dark" />
+            </h:commandButton>
+            <h2>
+                <h:panelGroup id="light"><h:outputText id="light1" value="Light"/></h:panelGroup>
+                <h:outputText id="warm"  value="Warm"/>
+                <h:outputText id="dark"  value="Dark"/>
+            </h2>
+        </h:form>
+
+        <h:form>
+            <p:commandButton value="Family"  actionListener="#{userAjaxData.slectedGroup}">
+                <f:attribute name="image" value="family" />
+                <f:ajax render="Family" />
+            </p:commandButton>
+            <p:commandButton value="Karam" actionListener="#{userAjaxData.slectedGroup}">
+                <f:attribute name="image" value="karam" />
+                <f:ajax render="Family"/>
+            </p:commandButton>
+            <p:commandButton value="Memo" actionListener="#{userAjaxData.slectedGroup}">
+                <f:attribute name="image" value="memo" />
+                <f:ajax render="Family"/>
+            </p:commandButton>
+            <p:commandButton value="Baba" actionListener="#{userAjaxData.slectedGroup}">
+                <f:attribute name="image" value="baba" />
+                <f:ajax render="Family"/>
+            </p:commandButton>
+
+            <h:panelGroup id="Family">
+                <h:graphicImage library="images/mitarbeiter" name="family.png" id="FamilyImg" alt="Family" rendered="#{userAjaxData.imageName eq family}"/>
+                <p:graphicImage library="images/mitarbeiter" name="Karam+Almoued.png" id="KaramImg" alt="Karam" rendered="#{userAjaxData.imageName eq karam}"/>
+                <p:graphicImage library="images/mitarbeiter" name="Mariam+Almawed.png" id="MemoImg" alt="Memo" rendered="#{userAjaxData.imageName eq memo}"/>
+                <p:graphicImage library="images/mitarbeiter" name="Raid+Almoued.png" id="BabaImg" alt="Baba" rendered="#{userAjaxData.imageName eq baba}"/>
+            </h:panelGroup>
+        </h:form>
+        
+        <h:form id="form">
+    <h:commandButton
+        id="familyButton"
+        action="#{toggleImageView.setImage('family.png')}"
+        value="Family"
+    >
+        <f:ajax render="image" />
+    </h:commandButton>
+    <h:commandButton
+        id="karamButton"
+        action="#{toggleImageView.setImage('karam.png')}"
+        value="Karam"
+    >
+        <f:ajax render="image" />
+    </h:commandButton>
+    <h:commandButton
+        id="memoButton"
+        action="#{toggleImageView.setImage('memo.png')}"
+        value="Memo"
+    >
+        <f:ajax render="image" />
+    </h:commandButton>
+    <h:commandButton
+        id="babaButton"
+        action="#{toggleImageView.setImage('baba.png')}"
+        value="Baba"
+    >
+        <f:ajax render="image" />
+    </h:commandButton>
+    <br />
+    <h:graphicImage
+        id="image"
+        library="image/img"
+        name="#{toggleImageView.image}"
+    />
+</h:form>
+    </h:body>
+</html>

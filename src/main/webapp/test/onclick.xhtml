@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>TODO supply a title</title>
+        <script>
+            function showAlert() {
+                alert("onclick Event detected!");
+            }
+
+            function changeTextColor() {
+                document.getElementById("text").style.color = "red";
+            }
+        </script>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+    </h:head>
+
+    <h:body>
+        <div><h:form>
+                <tr>
+                    <td><p:commandButton value="Log in" onclick="showAlert();"/></td>
+                    <td><p:commandButton value="Direct Alert"  onclick="alert('welcome');"/></td>
+                    <td><p:commandButton value="Color"  onclick="changeTextColor();"/></td>  
+                    <br></br>
+                    <p:inputText />
+                    <p:commandButton type="reset" value="rest value"/>
+                </tr>
+
+                <br></br>
+                <br></br>
+
+                <p id="text">color will be changed</p>
+
+                <br></br>
+                <br></br>
+                <p:commandButton  value="commandbutton" action="result"/>
+
+                <br></br>
+                <p:button value="button" outcome="result" />
+                <br></br>
+
+                <h:graphicImage library="images/mitarbeiter" name="Ivon+Ottomann.png"/>
+
+                <h:panelGrid columns="4">
+                    <h:commandLink action="result">
+                        <h:graphicImage library="images/mitarbeiter" name="Ivon+Ottomann.png" style="width: 150px"/>
+                    </h:commandLink>
+
+                    <h:link outcome="result">
+                        <h:graphicImage library="images/mitarbeiter" name="unknown.png" style="width: 150px"/>
+                    </h:link>
+
+                    <h:outputLink value="result.xhtml" >
+                        Login page
+                    </h:outputLink>
+
+                    <h:outputLink value="result.xhtml">
+                        <h:outputText value="Login page" />
+                        <f:param name="username" value="mkyong" />
+                    </h:outputLink>
+                </h:panelGrid>
+
+                <h:panelGrid columns="1">
+                    <h:commandLink id="openPopUp" value="New Window" target="blankPopUp" action="result"
+                                   onclick="window.open('', 'blankPopUp', 'status=no,toolbar=no,location=no,menubar=no,resizable,width=1008,height=690,scrollbars,left=100,top=50');"  />
+                    <h:commandLink id="openPopUp2" value="New Tab" target="_blank" action="result"/>     
+                </h:panelGrid>
+            </h:form>
+
+        </div>
+    </h:body>
+</html>

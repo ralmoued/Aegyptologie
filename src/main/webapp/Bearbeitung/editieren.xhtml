@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Editieren</title>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+    </h:head>
+    <h:body>
+        <ui:include src="header.xhtml"/>
+
+        <h:form id="form" style="margin-top: 80px;">
+            <h1>Administration</h1>
+            <center>
+                <h2>Wählen Sie bitte den Bereich, den editieren möchte</h2>
+                <br></br>
+                <tr>
+                    <td></td>
+                    <td><p:commandButton value="Einleitungstext" action="EinleitungstextEditieren?faces-redirect=true" id="introTxt" style="width:200px;height:50px;margin:10px"/>
+                        <br></br><p:commandButton value="Woerterbuechern" action="woerterbuch?faces-redirect=true" id="wb" style="width:200px;height:50px;margin:10px"/>
+                        <br></br> <p:commandButton value="Mitarbeiter" action="mitarbeiter?faces-redirect=true" id="mit" style="width:200px;height:50px;margin:10px"/>
+                        <br></br>  <p:commandButton value="Impressum" action="impressumEditieren?faces-redirect=true" id="impTxt" style="width:200px;height:50px;margin:10px"/>
+                        <br></br>  <p:commandButton value="Benutzerhandbuch" action="upload?faces-redirect=true" id="ug" style="width:200px;height:50px;margin:10px"/>
+                    </td>
+                </tr>
+            </center>
+        </h:form>
+
+    </h:body>
+</html>

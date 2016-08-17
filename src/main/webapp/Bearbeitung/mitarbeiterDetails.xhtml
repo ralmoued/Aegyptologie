@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Mitarbeiter</title>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+    </h:head>
+    <h:body>
+
+        <ui:include src="header.xhtml"/>
+
+        <div id="mitarbeiterDetails" style="max-width:1100px; padding-top: 50px; 
+             min-width:265px; margin-bottom: 20px; margin-top: 20px;
+             margin-left: 50px; margin-right: 50px; border-width:1.5px;
+             border-radius:20px; border-color:black; overflow:hidden;">
+
+            <h:form id="employeeDetails" style="margin-left: 50px; margin-right: 50px; margin-top: 20px">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+                <div id="details">
+                    <ui:repeat var="mit" value="#{mitarbeiter.mitarbeiterDetails}" varStatus="status">
+                        <p:fieldset legend="Mitarbeiterdaten">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p:panelGrid columns="2">
+                                            <f:facet name="header">
+                                                <p:graphicImage library="images/mitarbeiter" width="150px"
+                                                                name="#{mitarbeiter.finalName(mit.vorname)}+#{mitarbeiter.finalName(mit.nachname)}.png" />
+                                            </f:facet>
+
+                                            <h:outputText value="Name:" />
+                                            <h:outputText value="#{mit.titel} #{mit.vorname} #{mit.nachname}" />
+
+                                            <h:outputText value="Email:" rendered="#{!empty mit.email}" />
+                                            <h:outputText value="#{mit.email}" 
+                                                          rendered="#{!empty mit.email}" escape="false"/>
+
+                                            <h:outputText value="Tel:" rendered="#{!empty mit.telephon}"/>
+                                            <h:outputText value="#{mit.telephon}" 
+                                                          rendered="#{!empty mit.telephon}" escape="false"/>
+
+                                            <h:outputText value="Arbeiten seit:" rendered="#{!empty mit.beaschaeftigungsDauer}"/>
+                                            <h:outputText value="#{mit.beaschaeftigungsDauer}" 
+                                                          rendered="#{!empty mit.beaschaeftigungsDauer}" escape="false"/>
+
+                                            <h:outputText value="AktivitÃ¤t:" rendered="#{!empty mit.kurzLebenslauf}"/>
+                                            <h:outputText value="#{mit.kurzLebenslauf}" 
+                                                          rendered="#{!empty mit.kurzLebenslauf}" escape="false"/>
+                                        </p:panelGrid>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><p:commandButton value="LÃ¶schen" id="del" style="width: 120px"
+                                                         action="#{mitarbeiter.deleteAction(mit.id)}" 
+                                                         actionListener="#{mitarbeiter.delMsg()}" update="@form" />
+                                        <p:commandButton value="Editieren" id="edit" style="width: 120px"
+                                                         action="#{mitarbeiter.setAktualisierung(mit.id)}"/>
+                                        <p:commandButton value="ZurÃ¼ck" id="back"
+                                                         action="mitarbeiter?faces-redirect=true" style="width:120px"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </ui:repeat>
+                </div>
+            </h:form>
+            <br></br>
+            <br></br>
+        </div>
+
+    </h:body>
+</html>

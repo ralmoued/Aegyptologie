@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>#{sprache.index}</title>
+    </h:head>
+
+    <h:body>
+        <div>
+            <h:form id="intro">
+
+                <font size="+5" dir="left"> #{sprache.introduction} </font>
+                <div id="separator"/>
+                <div id="introductionText">
+                    <h:outputText value="#{intro.introductionFromDatabase(sprache.language)}" escape="false" />
+                </div>
+                <div id="separator"/>
+            </h:form>
+
+            <h:form id="form">
+                <h:outputText value="#{sprache.dicChoice}"
+                              style="font-size: x-large; color: #440000" />
+                <br />
+
+
+                <p:ring id="dictionary" value="#{ring.wbuch}" var="wb"
+                        styleClass="image-ring" easing="easeInOutBack"
+                        style="margin-top: -20px; margin-right: 100px; width: 800px;">
+
+                    <p:graphicImage library="images/woerterbuechern" name="#{wb.datei}.png"
+                                    class="roundrect" />
+                    
+                    <p:outputPanel style="text-align: center;" layout="block">
+
+                        <p:commandLink value="#{wb.kurztitel}" update=":form:wbDetail"
+                                       title="View" oncomplete="PF('wbDialog').show();">
+                            <f:setPropertyActionListener value="#{wb}"
+                                                         target="#{ring.selectedWb}" />
+                        </p:commandLink>
+                    </p:outputPanel>
+                </p:ring>
+
+                <!--
+                <br></br>
+                <br></br>
+                <br></br>
+                <p:contentFlow value="#{ring.wbuch}" var="wb" style="background: #D2B48C">
+                    <p:graphicImage value="/images/woerterbuechern/#{wb.datei}.png"
+                                   styleClass="content" />
+                    <div class="caption" >#{wb}</div>
+                </p:contentFlow>
+                -->
+
+                <p:dialog header="Information" widgetVar="wbDialog" modal="true"
+                          showEffect="fade" hideEffect="fade" resizable="true" width="800">
+                    <p:outputPanel id="wbDetail" style="text-align:center;"
+                                   layout="block">
+                        <p:panelGrid columns="2" rendered="#{not empty ring.selectedWb}"
+                                     columnClasses="value">
+                            <p:panelGrid columns="1" rendered="#{not empty ring.selectedWb}"
+                                         columnClasses="value">
+                                <f:facet name="header">
+                                    <p:graphicImage library="images/woerterbuechern" class="woerterbuechern"
+                                                    name="#{ring.selectedWb.datei}.png"/>
+                                </f:facet>
+                            </p:panelGrid>
+                            <p:panelGrid columns="2" rendered="#{not empty ring.selectedWb}"
+                                         columnClasses="value">
+                                <f:facet name="header">
+                                    <h:outputText value="#{ring.selectedWb.kurztitel}"
+                                                  escape="false" />
+                                </f:facet>
+
+                                <h:outputText value="#{sprache.dicTitle}" />
+                                <h:outputText value="#{ring.selectedWb.titel}" escape="false" />
+
+                                <h:outputText value="#{sprache.dic}" />
+                                <h:outputText value="#{ring.selectedWb.wbuch}" escape="false" />
+
+                                <h:outputText value="#{sprache.author}" />
+                                <h:outputText value="#{ring.selectedWb.autor}" escape="false" />
+
+                                <h:outputText value="#{sprache.publicationPlace}" />
+                                <h:outputText value="#{ring.selectedWb.erscheinungsort}"
+                                              escape="false" />
+
+                                <h:outputText value="#{sprache.publicationDate}" />
+                                <h:outputText value="#{ring.selectedWb.erscheinungsjahr}"
+                                              escape="false" />
+
+                                <f:facet name="footer">
+                                    <center>
+                                        <p:commandButton id="wbuch" value="#{sprache.dicInfo}"
+                                                         action="wbuch?faces-redirect=true" ajax="false">
+                                            <f:param name="id" value="#{ring.selectedWb.wbuch}" />
+                                        </p:commandButton>
+                                    </center>
+                                </f:facet>
+                            </p:panelGrid>
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+
+            </h:form>
+        </div>
+    </h:body>
+</html>

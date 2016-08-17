@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Editieren</title>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:panel id="panel" header="Wörterbuch" style="margin-bottom:10px;">
+                <h1>#{dictionary.titelFromDatabase}</h1>
+                <table>
+                    <!-- Insert Data in Database-->
+                    <tr>
+                        <td><h:outputText value="Titel : "/></td>
+                        <td><h:inputText value="#{dictionary.titel}"/></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Text : " /></td>
+                        <td><p:editor id="editor" value="#{dictionary.text}" width="600"/> </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><p:commandButton value="Aktualisierung" action="#{dictionary.update}" style="margin:5px"
+                                             update="@(form)"/>
+                            <p:commandButton value="Reset" update="panel" process="@this" actionListener="#{dictionary.reset}" />
+                            <p:commandButton value="Zurück" action="woerterbuch"/>
+                        </td>
+                    </tr>
+                </table>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+
+</html>

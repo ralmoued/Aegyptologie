@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Cspital for the countries</title>
+        <h:outputStylesheet library="css" name="test-Styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputLabel for="countries" value="Select a country: "/>
+            <h:selectOneMenu id="countries" value="#{country.name}"  styleClass="output100"
+                             valueChangeListener="#{country.findCapital}" onchange="submit();">
+                <f:selectItem itemLabel="---" itemValue="---"/>
+                <f:selectItem itemLabel="United States" itemValue="USA"/>
+                <f:selectItem itemLabel="Egypt" itemValue="Egypt"/>
+                <f:selectItem itemLabel="Denmark" itemValue="Denmark"/>
+            </h:selectOneMenu>
+           <br/>
+            <h:outputText value="Capital of #{country.name} is #{country.capital}"
+                          rendered="#{country.capital ne null}" styleClass="output100"/>
+            </h:form>
+    </h:body>
+</html>

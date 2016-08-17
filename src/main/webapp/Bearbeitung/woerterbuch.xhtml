@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>WÃ¶rterbuch</title>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+    </h:head>
+    <h:body>
+
+
+        <h:form id="txt">
+            
+                <h:outputText id="nbOrder" value=" Anzahl der WÃ¶rterbÃ¼chern : #{dictionary.wbCount}"/>
+                <h1>WÃ¶rterbuch dataTable </h1>
+                <center>
+                    <h:dataTable value="#{dictionary.wbList}" var="wb" border="1"
+                                 styleClass="order-table"
+                                 headerClass="order-table-header"
+                                 rowClasses="order-table-odd-row,order-table-even-row"
+                                 >
+                        <h:column>
+                            <f:facet name="header">Titel</f:facet>
+                            <h:outputText value="#{wb.titel}" />
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Text</f:facet>
+                            <h:outputText value="#{wb.text}" escape ="false" />   
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Edit</f:facet>
+                            <p:commandButton value="Edit" action="#{dictionary.setAktualisierung(wb.id)}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Delete</f:facet>
+                            <p:commandButton value="Delete" action="#{dictionary.deleteAction(wb.id)}" update="@form" />
+                        </h:column> 
+
+                    </h:dataTable>
+                </center>
+
+                <h3>WÃ¶rter Eingabe</h3>
+                <table>
+                    <!-- Insert Data in Database-->
+                    <tr>
+                        <td><h:outputText value="Titel : "/></td>
+                        <td><h:inputText value="#{dictionary.titel}"/></td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Text : " /></td>
+                        <td><p:editor id="editor" value="#{dictionary.text}" width="600"/> </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><p:commandButton value="Add" action="#{dictionary.addAction}" update="@form"/>
+                            <p:commandButton value="Reset" update="@form" process="@this" actionListener="#{dictionary.reset}" />
+                            <p:commandButton value="ZurÃ¼ck" action="editieren"/>
+                        </td>
+                    </tr>
+                </table>
+
+        </h:form>
+    </h:body>
+
+</html>

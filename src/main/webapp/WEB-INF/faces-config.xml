@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+    <application>
+        <locale-config>
+            <default-locale>de</default-locale>
+            <supported-locale>en</supported-locale>
+            <supported-locale>ar</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>I18n.lang</base-name>
+            <var>sprache</var>
+        </resource-bundle>
+        
+        <!-- SpringBeanFacesELResolver -->
+        <el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+
+    </application>
+    
+    <!-- Registering the Custom Exception Handler Factory Class in the JSF Configuration File
+    <factory>
+        <exception-handler-factory>
+            de.unileipzig.wirote.control.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>-->
+
+
+        
+        
+</faces-config>

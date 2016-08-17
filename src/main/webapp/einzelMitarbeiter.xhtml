@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xml:lang="#{localeManger.language}" dir="#{localeManger.dir}"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+        <f:viewParam name="firstname" value="#{mitarbeiter.vorname}"/>
+        <f:viewParam name="lastname" value="#{mitarbeiter.nachname}"/>
+        <f:viewParam name="locale" value="#{localeManger.language}"/>
+    </f:metadata>
+    <f:view locale="#{localeManger.language}">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>#{sprache.employees}</title>
+            <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+            <h:outputStylesheet library="css" name="reset-Styles.css"/>
+        </h:head>
+
+        <h:body>
+            <div id="page">
+                <div id="header-container">
+                    <div id="header">
+                        <div id="language_switcher">
+                            <ui:insert name="language_switcher">
+                                <ui:include src="language_switcher.xhtml" />
+                            </ui:insert>
+                        </div>
+                    <div id="searchBar">
+                        <ui:insert name="searchBar">
+                            <ui:include src="searchBar.xhtml" />
+                        </ui:insert>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-container">
+                <div id="content">
+                    <h:form id="txt">
+                        <font size="+5" dir="left">
+                            #{sprache.employees}
+                        </font>
+
+                        <div id="separator"/>
+
+                        <div id="details">
+                            <ui:repeat var="mit" value="#{mitarbeiter.mitarbeiterDetails}" varStatus="status">
+                                <h:graphicImage library="images/mitarbeiter" 
+                                            name="#{mitarbeiter.finalName(mit.vorname)}+#{mitarbeiter.finalName(mit.nachname)}.png" 
+                                            alt=""  class="mitarbeiterImage"/>
+
+                                <ul>
+                                    #{mit.titel} #{mit.vorname} #{mit.nachname}<br></br>
+                                    <br></br>
+                                    <h:outputText value="#{sprache.email} #{mit.email}&lt;br /&gt; &lt;br /&gt;" rendered="#{!empty mit.email}" escape="false"/>
+
+                                    <h:outputText value="#{sprache.phone} #{mit.telephon}&lt;br /&gt; &lt;br /&gt;" rendered="#{!empty mit.telephon}" escape="false"/>
+
+                                    <h:outputText value="#{sprache.empDuration} #{mit.beaschaeftigungsDauer}&lt;br /&gt; &lt;br /&gt;" rendered="#{!empty mit.beaschaeftigungsDauer}" escape="false"/>
+                                    <br></br>
+                                    <br></br>
+                                    <h:outputText value="#{sprache.aktivity}&lt;br /&gt;" rendered="#{!empty mit.kurzLebenslauf}" escape="false" style="font-size: x-large"/>
+                                    <h:outputText value="#{mit.kurzLebenslauf}" rendered="#{!empty mit.kurzLebenslauf}" escape="false"/>
+                                </ul>
+                            </ui:repeat>
+                        </div>
+                    </h:form>
+                    <br></br>
+                    <br></br>
+                </div>
+            </div>
+
+            <div id="footer-container">
+                <div id="footer">
+                    <ui:insert name="footer">
+                        <ui:include src="footer.xhtml" />
+                    </ui:insert>
+                </div>
+            </div>
+
+            </div>
+        </h:body>
+    </f:view>
+</html>

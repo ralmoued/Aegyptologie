@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Registration</title>
+    </h:head>
+    <h:body>
+
+        <h:form  id="myForm">
+            <h:panelGrid columns="4">
+                <p:outputLabel value="Name" for="name"/>
+                <p:inputText id="name" required="true" 
+                             label="name" size="23" value="#{userAjaxData.name}" 
+                             requiredMessage=" Name is required"
+                             validatorMessage=" Name must be just Alphapatic and at leat 4 Charachters">
+                    <f:validateRegex  for="name" pattern="((?=.*[a-zA-Z]).{4,})"/>
+                    <p:ajax update="msg" event="keyup" />
+                </p:inputText>
+                <p:watermark for="name" value="name *" />
+                <p:message id="msg" for="name" style="color:orange" />
+            </h:panelGrid>
+            <p:commandButton value="Save" update="myForm" type="submit" icon="ui-icon-check" />
+        </h:form>
+
+
+    </h:body>
+</html>
+
+

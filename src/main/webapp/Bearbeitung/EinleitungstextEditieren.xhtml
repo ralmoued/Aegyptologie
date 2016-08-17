@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeManger.language}">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>Einleitung</title>
+            <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+        </h:head>
+        <h:body>
+            <ui:include src="header.xhtml"/>
+
+            <div style="position: absolute; left: 75%; top: 10%;">
+            <ui:insert name="language_switcher" >
+                <ui:include src="../language_switcher.xhtml" />
+            </ui:insert>
+            </div>
+
+            <h:form id="hidden">
+                <h:inputHidden value="#{intro.introductionFromDatabase(sprache.language)}"/>
+            </h:form>
+
+            <center>
+                <h:form id="form" style="margin-top: 80px">
+                    <h1>#{sprache.einleitungstext}</h1>
+
+                    <p:editor id="editor" value="#{intro.text}" width="600"/> 
+                    <br/>
+                    <p:commandButton value="#{sprache.einleitungInsertButton}"  id="languageCode" 
+                                     action="#{intro.insertEinleitung(sprache.language)}"
+                                     actionListener="#{intro.addMsg(sprache.language)}"
+                                     style="margin:5px;width:170px"
+                                     update="@form"/>
+                    <p:commandButton value="#{sprache.resetButton}" update="@form" id="reset"
+                                     actionListener="#{intro.reset}" style="width:170px"/>
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+                </h:form> 
+            </center>
+        </h:body>
+    </f:view>
+</html>

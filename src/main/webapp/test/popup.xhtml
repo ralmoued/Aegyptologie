@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <title>TODO supply a title</title>
+
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  />
+        <h:outputScript library="js" name="javascript.js" />
+    </h:head>
+
+    <h:body>
+        <div><h:form>
+                <h:panelGrid columns="1">
+                    <h:commandLink id="openPopUp" value="New Tab + pop up" target="_blank" action="result?faces-redirect=true"
+                                   onclick="window.open('result.xhtml', 'blankPopUp', 'status=no,toolbar=no,location=no,menubar=no,resizable,width=1008,height=690,scrollbars,left=100,top=50');"  />
+                    <h:commandLink id="openPopUp1" value="Same Tab + pop up" target="" action="result?faces-redirect=true"
+                                   onclick="window.open('result.xhtml', 'blankPopUp1', 'status=no,toolbar=no,location=no,menubar=no,resizable,width=1008,height=690,scrollbars,left=100,top=50');"  />
+                    <h:commandLink id="openPopUp2" value="New Tab" target="blank" action="result?faces-redirect=true"/>
+                    <h:commandLink id="openPopUp3" value="New Window" target="_blank" action="result?faces-redirect=true"/>
+                    <h:commandLink id="jscript" value="JavaScript" onclick="reactToChangedRadio()"/>
+                    
+                </h:panelGrid>
+            </h:form>
+
+        </div>
+    </h:body>
+</html>

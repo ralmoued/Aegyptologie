@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <h:commandButton id="familyButton" action="#{toggleImageView.setImage('Family.png')}" value="Family">
+                <f:ajax render="image" />
+            </h:commandButton>
+            <h:commandButton id="karamButton" action="#{toggleImageView.setImage('Karam+Almoued.png')}"  value="Karam">
+                <f:ajax render="image" />
+            </h:commandButton>
+            <h:commandButton id="memoButton" action="#{toggleImageView.setImage('Mariam+Almawed.png')}"  value="Memo">
+                <f:ajax render="image" />
+            </h:commandButton>
+            <h:commandButton id="babaButton" action="#{toggleImageView.setImage('Raid+Almoued.png')}" value="Baba">
+                <f:ajax render="image" />
+            </h:commandButton>
+            <br />
+            <h:panelGroup id="image">
+            <p:graphicImage id="image1" library="images/mitarbeiter" name="#{toggleImageView.image}"/>
+            <p:graphicImage id="image2" library="images/mitarbeiter" name="#{toggleImageView.image}"/>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="#{localeManger.language}" dir="#{localeManger.dir}"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view locale="#{localeManger.language}" transient="true">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>Woerterbuch</title>
+            <link rel="stylesheet"
+                  href="JSF-Styles.css" type="text/css"/> 
+        </h:head>
+        <h:body>
+            <div id="div">
+
+                <ui:insert name="language_switcher" >
+                    <ui:include src="language_switcher.xhtml" />
+                </ui:insert>
+
+                <center>
+                    <h:form prependId="false">
+                        <ui:repeat var="wb" value="#{wbuch.wbList}" varStatus="status">
+                            <table>
+                                <tr>
+                                    <h:outputText value="#{sprache.dicTitle}" />
+                                    <h:outputText value="#{wb.titel}&lt;br /&gt;" 
+                                                  escape="false" />
+                                </tr>
+                                <tr>
+                                    <h:outputText value="#{sprache.dic}" />
+                                    <h:outputText value="#{wb.wbuch}&lt;br /&gt;" 
+                                                  escape="false" />
+                                </tr>
+                                <tr>
+                                    <h:outputText value="#{sprache.author}" />
+                                    <h:outputText value="#{wb.autor}&lt;br /&gt;" 
+                                                  escape="false" />
+                                </tr>
+                                <tr>
+                                    <h:outputText value="#{sprache.publicationPlace}" />
+                                    <h:outputText value="#{wb.erscheinungsort}&lt;br /&gt;" 
+                                                  escape="false" />
+                                </tr>
+                                <tr>
+                                    <h:outputText value="#{sprache.publicationDate}" />
+                                    <h:outputText value="#{wb.erscheinungsjahr}&lt;br /&gt;"   
+                                                  escape="false" />
+                                </tr>
+                            </table>
+                        </ui:repeat>
+                        <p:commandButton value="Zurueck" action="index?faces-redirect=true"/>
+
+                    </h:form>
+                </center>
+            </div>
+        </h:body>
+    </f:view>
+</html>

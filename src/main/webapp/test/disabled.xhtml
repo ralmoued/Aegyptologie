@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:selectBooleanCheckbox  value="#{indexBean.changed}" 
+                                      valueChangeListener="#{indexBean.isChanged}" onchange="submit()"/>
+
+            <h:commandButton value="disable the check box" disabled="#{!indexBean.changed}"
+                             actionListener="#{indexBean.isCklicked}" immediate="true"/>
+
+            <h:selectBooleanCheckbox id="checkboxId" value="#{indexBean.checked}" disabled="#{!indexBean.cklicked}">
+                <p:ajax event="click" update="panelId" />
+            </h:selectBooleanCheckbox>
+
+            <h:panelGrid id="panelId" >
+                <h:outputLabel rendered="#{!indexBean.checked}" >some text</h:outputLabel>
+                <h:outputText rendered="#{!indexBean.checked}" value="some text 2" />
+            </h:panelGrid>
+            <!--            
+            rendered="#{myBean.booleanValue}"
+            rendered="#{myBean.stringValue == 'value'}"
+            rendered="#{myBean.intValue > 10}"
+            rendered="#{myBean.objectValue == null}"
+            rendered="#{!empty myBean.collectionValue}"
+            rendered="#{myBean.stringValue != null && myBean.intValue == 1}"
+            rendered="#{myBean.stringValue != 'value' || !myBean.booleanValue}"
+            -->
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,57 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <!-- <url-mapping id="lang">
+        <pattern value="/#{langSwitcher.lang}" />
+    </url-mapping> -->
+        
+     <!-- <url-mapping id="lang">
+        <pattern value="/#{view.locale.language}/index" />
+        <view-id value="/index.xhtml"/>
+    </url-mapping> -->
+    
+    <url-mapping id="base">
+       <pattern value="#{localeManger.language}" />
+    </url-mapping>
+    
+     <url-mapping id="index">
+        <pattern value="/index"/>
+        <view-id value="/index.xhtml"/>
+    </url-mapping>
+    <url-mapping id="anmelden">
+        <pattern value="/anmelden" />
+        <view-id value="/anmelden.xhtml" />
+    </url-mapping>
+    <url-mapping id="mitarbeiter">
+        <pattern value="/mitarbeiter"/>
+        <view-id value="/mitarbeiter.xhtml"/>
+    </url-mapping> 
+    <url-mapping id="impressum">           
+        <pattern value="/impressum"/>
+        <view-id value="/impressum.xhtml"/>
+    </url-mapping>
+    <url-mapping id="benutzerhandbuch">           
+        <pattern value="/benutzerhandbuch"/>
+        <view-id value="/benutzerhandbuch.xhtml"/>
+    </url-mapping>
+    <url-mapping id="zuordnen">           
+        <pattern value="/zuordnen"/>
+        <view-id value="/zuordnen.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="einzelMitarbeiter">
+        <pattern value="/#{locale}/mitarbeiter/#{firstname}_#{lastname}"/>
+        <view-id value="/einzelMitarbeiter.xhtml" /> 
+    </url-mapping>
+    
+    <url-mapping id="prettyFaces">
+        <!-- <pattern value="/test/prettyFaces/#{number}"/> 
+        <pattern value="/test/prettyFaces/#{paramter.lang}"/> -->
+        <pattern value="/test/prettyFaces/#{number : paramter.lang}"/> 
+        <view-id value="/test/prettyFaces.xhtml" /> 
+        <!-- <query-param name="lang">#{paramter.lang}</query-param> -->
+    </url-mapping>
+    
+</pretty-config>

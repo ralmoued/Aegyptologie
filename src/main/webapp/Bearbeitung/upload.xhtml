@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="#{localeManger.language}" dir="#{localeManger.dir}"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeManger.language}">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>#{sprache.UGuideUpload}</title>
+            <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+        </h:head>
+        <h:body>
+            <ui:include src="header.xhtml"/>
+
+            <div style="position: absolute; left: 75%; top: 10%;">
+                <ui:insert name="language_switcher" >
+                    <ui:include src="../language_switcher.xhtml" />
+                </ui:insert>
+            </div>
+
+            <h:form id="form" style="margin-left: 50px; margin-right: 50px; 
+                    margin-top: 80px; margin-bottom: 20px"> 
+                <center>
+                    <h2>#{sprache.selectText}</h2>
+                </center>
+ 
+                <center>
+                    <p:fileUpload
+                        mode="advanced" id="upload"
+                        fileUploadListener="#{fileUploadController.upload}"
+                        allowTypes="/(\.|\/)(pdf|PDF)$/" 
+                        auto="false" update="form" dragDropSupport="true" fileLimit="1"
+                        label="#{sprache.SelectButton}" uploadLabel="#{sprache.upload}" cancelLabel="#{sprache.cancel}" 
+                        invalidFileMessage="#{sprache.invalidFileMessage} &lt;br /&gt;">
+                        <f:attribute name="languageCode" value="#{localeManger.language}" />
+                    </p:fileUpload>
+                    
+                    <p:growl id="English_messages" showDetail="true" showSummary="true"/>
+                    <br/>
+                    
+                    <h:outputText value="#{sprache.uploadMsg}"
+                                  rendered="#{fileUploadController.fileSuccess eq true}"/>
+                </center>
+            </h:form>
+
+
+        </h:body>
+    </f:view>
+</html>

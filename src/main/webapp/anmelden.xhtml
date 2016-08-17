@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="#{localeManger.language}" dir="#{localeManger.dir}"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{localeManger.language}">
+        <f:loadBundle basename="I18n.lang" var="sprache"/>
+        <h:head>
+            <title>#{sprache.headtitle}</title>
+            <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+            <h:outputScript library="js"  name="arabicLanguage.js"/> 
+        </h:head>
+        <h:body>
+            <div id="page">
+                <div id="header-container">
+                    <div id="header">
+                        <div id="language_switcher">
+                            <ui:insert name="language_switcher">
+                                <ui:include src="language_switcher.xhtml" />
+                            </ui:insert>
+                        </div>
+                    <div id="searchBar">
+                        <ui:insert name="searchBar">
+                            <ui:include src="searchBar.xhtml" />
+                        </ui:insert>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-container">
+                <div id="content">
+
+                    <h:form id="anmelden">
+                        <h2><h:outputText value="#{sprache.title}" dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}"/></h2>
+                        <table>
+                            <tr>
+                                <td>#{sprache.username}</td>
+                                <td><p:inputText id="userName" required="true" 
+                                                 label="userName" size="23" value="#{login.benutzername}" 
+                                                 requiredMessage=" #{sprache.UserRequiredMessage}"
+                                                 validatorMessage=" #{sprache.userValidatorMessage}">
+                                        <f:validateRegex  for="userName" pattern="(([0-9a-zA-Z]*).{3,})"/>
+                                    </p:inputText>
+                                    <p:watermark for="userName" value="#{sprache.userWatermark}" />
+                                    <h:message for="userName" style="color:red" /></td>
+                            </tr>     
+                            <tr>
+                                <td>#{sprache.pass}</td>
+                                <td><p:password id="pwd" value="#{login.passwort}" label="Password"
+                                                size="23" required="true"
+                                                requiredMessage=" #{sprache.PassRequiredMessage}">
+                                    </p:password>
+                                    <p:watermark for="pwd" value="#{sprache.passWatermark}" />
+                                    <h:message for="pwd" style="color:red" /><br/></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td><p:commandButton value="#{sprache.logIn}" action="#{login.bearbeitungsseite(sprache.language)}"
+                                                     id="login" update="@form" style="margin-top: 10px; "/></td>
+                            </tr>
+                            <tr>  
+                                <tr></tr>
+                                <tr></tr>
+                                <td><h:outputText value="#{login.message}"
+                                                  style="color: red;margin-left: 125px"/></td>
+                            </tr>
+                        </table>
+                    </h:form>
+                </div>
+            </div>
+
+            <center>
+                <p:messages id="messages" globalOnly="true" showDetail="true" autoUpdate="true" closable="true" />
+            </center>
+
+            <div id="footer-container">
+                <div id="footer">
+                    <ui:insert name="footer">
+                        <ui:include src="footer.xhtml" />
+                    </ui:insert>
+                </div>
+            </div>
+            </div>
+        </h:body>
+    </f:view>
+</html>

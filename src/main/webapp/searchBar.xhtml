@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"   
+      xmlns:p="http://primefaces.org/ui">  
+    <h:head>
+        <title>Search bar</title>
+    </h:head>
+    <body>  
+        <h:form>
+            <p:messages id="messages" showDetail="true"/>
+
+            <h:panelGrid columns="1" cellpadding="5">
+                <p:inputText id="keyword" value="" label="Keyword" style=" border-radius:10px;"/>
+                <p:watermark for="keyword" value="Search" id="watermark"/>
+            </h:panelGrid>
+
+        </h:form>
+
+    </body>
+</html>
