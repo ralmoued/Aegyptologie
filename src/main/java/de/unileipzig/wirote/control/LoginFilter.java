@@ -32,6 +32,11 @@ public class LoginFilter implements Filter {
     /**
      * Prüft, ob Benutzer angemeldet ist 
      * Wenn nicht angemeldet sind, wird es an die index.xhtml Seite umgeleitet werden.
+     * @param request
+     * @param response
+     * @param chain
+     * @throws java.io.IOException
+     * @throws javax.servlet.ServletException
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
