@@ -123,6 +123,8 @@ public class DisplayPdf implements Serializable {
             System.out.println("NPE Stack Trace: " + Arrays.toString(e.getStackTrace()));
             System.out.println("Got an NullPointerException: " + e.getMessage());
         }
+        //return path: <Tomcat-installation-directory>/uploads//user_guide
+        pfad = System.getProperty("catalina.base") + pfad;
         return pfad;
     }
 

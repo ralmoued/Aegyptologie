@@ -74,6 +74,7 @@
         <filter-class>de.unileipzig.wirote.control.LoginFilter</filter-class>
     </filter>
     <!-- Set the login filter to secure all the pages in the /Bearbeitung/* path of the application -->
+    <!-- mandatory to allow the managed bean to forward the request to the filter -->
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/Bearbeitung/*</url-pattern>
@@ -81,6 +82,22 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
+    <!-- Enable Spring Filter: Spring Security works on the concept of Filters -->
+    <!-- Declare the Spring filter -->
+   
+    <!--<filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>-->
+    <!-- Defines urls pattern on which the filter is applied -->
+    <!--<filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>-->
+
+
     <!-- Cache filter -->
     <filter>
         <display-name>NoCacheFilter</display-name>

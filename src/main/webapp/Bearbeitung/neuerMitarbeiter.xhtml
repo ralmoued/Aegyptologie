@@ -21,7 +21,7 @@
             </div>
 
             <center>
-                <h:form prependId="false" style="margin-top: 80px">
+                <h:form id="form" style="margin-top: 80px">
                     <h1>Mitarbeiter Hinzufügen</h1>
                     <table>
                         <tr>
@@ -82,14 +82,18 @@
 
                         <tr> 
                             <td>Aktivitäten:</td>
-                            <td><p:editor id="editor" value="#{mitarbeiter.kurzLebenslauf}" width="600"/></td>
+                            <td><p:editor id="editor" value="#{mitarbeiter.kurzLebenslauf}" width="600"/><br/></td>
                         </tr>
+
                         <tr>
                             <td></td>
                             <td><p:commandButton value="Einfuegen" action="#{mitarbeiter.addAction}" id="add"
-                                                 actionListener="#{mitarbeiter.addMsg}" update="@(form)" style="width:170px;margin:5px"/> 
-                                <p:commandButton value="#{sprache.resetButton}" update="@form" id="reset"
+                                                 actionListener="#{mitarbeiter.addMsg}" update="@(form)"
+                                                 style="width:170px;margin:5px"/> 
+                                <p:commandButton value="#{sprache.resetButton}" update="@(form)" id="reset"
                                                  actionListener="#{mitarbeiter.reset}" style="width:170px"/>
+                                <p:commandButton value="Clear"  update="@(form)" id="clear"
+                                                 actionListener="#{mitarbeiter.clearForm}" immediate="true" />
                             </td>
                         </tr>
                     </table>

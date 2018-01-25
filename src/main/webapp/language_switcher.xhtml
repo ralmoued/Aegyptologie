@@ -3,27 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-
     <h:head>
         <title>Language Switcher</title>
     </h:head>
     <h:body>
-            <h:form id="langauge_form">
-                <h:commandLink action="#{localeManger.setLanguage('de')}" id="de"> 
-                    <p:graphicImage library="images/lang" name="german-icon.png"
-                                    class="langImage" alt="Deutsch"/>
-                </h:commandLink>
-                &nbsp;
-                <h:commandLink action="#{localeManger.setLanguage('en')}" id="en">
-                                    <p:graphicImage library="images/lang" name="english-icon.png"
-                                    class="langImage" alt="English"/>
-                </h:commandLink>
-                &nbsp;
-                <h:commandLink action="#{localeManger.setLanguage('ar')}" id="ar">
-                                    <p:graphicImage library="images/lang" name="arabic-icon.png"
-                                    class="langImage" alt="Arabic"/>
-                </h:commandLink>
-
-            </h:form>
+        <h:form id="langauge_form">
+            <h:commandLink action="#{localeManger.setLocale('de')}" id="de"> 
+                <p:graphicImage library="images/lang" name="german-icon.png"
+                                class="langImage" alt="Deutsch"/>
+            </h:commandLink>
+            &nbsp;
+            <h:commandLink action="#{localeManger.setLocale('en')}" id="en">
+                <p:graphicImage library="images/lang" name="english-icon.png"
+                                class="langImage" alt="English"/>
+            </h:commandLink>
+            &nbsp;
+            <h:commandLink action="#{localeManger.setLocale('ar')}" id="ar">
+                <p:graphicImage library="images/lang" name="arabic-icon.png"
+                                class="langImage" alt="Arabic"/>
+            </h:commandLink>
+        </h:form>
     </h:body>
 </html>

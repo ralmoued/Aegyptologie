@@ -5,7 +5,10 @@
       lang="#{localeManger.language}"
       xmlns:h="http://java.sun.com/jsf/html"  
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">  
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+        <f:viewParam name="language" value="#{localeManger.language}"/>
+    </f:metadata>
     <f:view locale="#{localeManger.language}">
         <f:loadBundle basename="I18n.lang" var="sprache"/>
         <h:head>

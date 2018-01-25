@@ -10,9 +10,9 @@
     </h:head>
     <h:body>
         <h:form id="form">
-            <h:commandButton id="familyButton" action="#{toggleImageView.setImage('Family.png')}" value="Family">
+            <h:commandLink id="familyButton" action="#{toggleImageView.setImage('Family.png')}" value="Family">
                 <f:ajax render="image" />
-            </h:commandButton>
+            </h:commandLink>
             <h:commandButton id="karamButton" action="#{toggleImageView.setImage('Karam+Almoued.png')}"  value="Karam">
                 <f:ajax render="image" />
             </h:commandButton>

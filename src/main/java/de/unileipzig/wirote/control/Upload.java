@@ -6,15 +6,20 @@ package de.unileipzig.wirote.control;
  */
 import de.unileipzig.wirote.database.MysqlConnection;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -37,6 +42,8 @@ public class Upload implements Serializable {
 
     private final transient Connection con;
     private UploadedFile file;
+    private final String userGuideFolder = "uploads/user_guide";
+    private final String empPhotoFolder = "uploads/employees";
 
     private boolean fileSuccess;
 
@@ -91,7 +98,7 @@ public class Upload implements Serializable {
                 stmt.executeUpdate(sql);
             }
             sql = "INSERT INTO benutzerhandbuch(Dateiname, Pfad, Language) "
-                    + "VALUES('" + fileName + "','" + getPath() + "','" + languageCode + "')";
+                    + "VALUES('" + fileName + "','" + "/" + userGuideFolder + "/" + "','" + languageCode + "')";
 
             stmt.executeUpdate(sql);
 
@@ -103,26 +110,27 @@ public class Upload implements Serializable {
     }
 
     /**
-     * Ladt die Englische version Pdf Datei hoch
+     * Ladt die Pdf Datei hoch
      *
      * @param event
      */
     public void upload(FileUploadEvent event) {
         file = event.getFile();
-        
+
         // Get the languageCode parameter from the upload.xml
         String languageCode = (String) event.getComponent().getAttributes().get("languageCode");
         addPdfToDB(file.getFileName(), languageCode);
-        
+
         if (fileSuccess) {
             FacesMessage msg = new FacesMessage("Die Datei ", event.getFile().getFileName() + " ist erfolgreich hochgeladen.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
             try {
-                copyFile(file.getFileName(), file.getInputstream());
-            } catch (IOException e) {
-                e.printStackTrace();
+                copyFileToResources(file.getFileName(), userGuideFolder);
+            } catch (IOException ex) {
+                Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         } else {
             FacesMessage msg = new FacesMessage("Die Datei ", event.getFile().getFileName() + " konnte nicht hochgeladen werden.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -130,41 +138,50 @@ public class Upload implements Serializable {
     }
 
     /**
-     * Ladt die Pdf Datei hoch
+     * Upload the photos of the employees
      *
-     * @param fileName
-     * @param in
+     * @param event
      */
-    public void copyFile(String fileName, InputStream in) {
+    public void upload_emp_photo(FileUploadEvent event) {
+        file = event.getFile();
+
+        //return the id of the employee and convert it from int to String
+        String emp_Id = (String) "" + event.getComponent().getAttributes().get("emp_Id");
+
+        
+        
         try {
-            try ( // write the inputStream to a FileOutputStream
-                    OutputStream out = new FileOutputStream(new File(getPath() + fileName))) {
-                int read = 0;
-                byte[] bytes = new byte[1024];
-
-                while ((read = in.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
-                }
-
-                in.close();
-                out.flush();
-            }
-
-            System.out.println("New file created!");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+            copyFileToResources(file.getFileName(), empPhotoFolder);
+        } catch (IOException ex) {
+            Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        if (fileSuccess) {
+            FacesMessage msg = new FacesMessage("Die Datei ", event.getFile().getFileName() + " ist erfolgreich hochgeladen.");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            
+            renameFile(file.getFileName(), emp_Id);
+
+        } else {
+            FacesMessage msg = new FacesMessage("Die Datei ", event.getFile().getFileName() + " konnte nicht hochgeladen werden.");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        
+        
+        fileSuccess=false;
     }
 
     /**
      * Defniert Die Pfad der Datei
      *
-     * @return path
+     * @return path 
+     * NOT USED
      */
     private String getPath() {
 //       return FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
         FileSystemView.getFileSystemView().getHomeDirectory();
         String Path = FileSystemView.getFileSystemView().getHomeDirectory() + "/Benutzerhandbuch/";
+        System.out.println("Path is : " + Path);
         boolean success = (new File(Path)).mkdir();
         if (success) {
             System.out.println("Directory: " + Path + " created");
@@ -175,7 +192,7 @@ public class Upload implements Serializable {
     /**
      * return Den aktuelle Benutzername
      *
-     * @return
+     * @return NOT USED
      */
     private String getUsername() {
         String name;
@@ -188,7 +205,8 @@ public class Upload implements Serializable {
      * code= en then we have English text or German text if code=de or both
      * texts if code= de en
      *
-     * @return the code of the language which stored in the database ('de', 'ar' and 'en')
+     * @return the code of the language which stored in the database ('de', 'ar'
+     * and 'en')
      */
     public String currentLanguage() {
         String code = "";
@@ -207,4 +225,43 @@ public class Upload implements Serializable {
         System.out.println(code);
         return code;
     }
+
+    public void copyFileToResources(String fileName, String uploadFolder) throws IOException {
+        //Upload the files to: <Tomcat-installation-directory>/uploads/...
+        File uploadDir = new File(System.getProperty("catalina.base"), uploadFolder);
+        File uploadFile = new File(uploadDir, fileName);
+        // creates the directory if it does not exist
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+        System.out.println("uploadDir " + uploadDir.getAbsolutePath());
+
+        //location of the  uploaded file in memory
+        InputStream input = file.getInputstream();
+        System.out.println("file.getInputstream() " + input);
+
+        //overwrite the destination file if it exists, and copy
+        // the file attributes, including the rwx permissions
+        CopyOption[] options = new CopyOption[]{
+            StandardCopyOption.REPLACE_EXISTING,};
+
+        Files.copy(input, uploadFile.toPath(), options);
+
+        fileSuccess = true;
+    }
+
+    public void renameFile(String fileName, String emp_Id){       
+        try {
+            Path source = Paths.get(System.getProperty("catalina.base") + "/" + empPhotoFolder + "/" + fileName);
+            System.out.println("source " + source);
+            
+            CopyOption[] options = new CopyOption[]{
+            StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE};
+            
+            Files.move(source, source.resolveSibling(emp_Id + ".png"), options);
+        } catch (IOException ex) {
+            Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    
 }

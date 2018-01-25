@@ -19,8 +19,8 @@
         <el-resolver>
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
-
     </application>
+
     
     <!-- Registering the Custom Exception Handler Factory Class in the JSF Configuration File
     <factory>

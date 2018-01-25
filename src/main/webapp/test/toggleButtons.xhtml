@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <h:commandButton value="Enable" action="#{toggleButtons.toggle}" disabled="#{toggleButtons.enabled}" />
+            <h:commandButton value="Disable" action="#{toggleButtons.toggle}" disabled="#{not toggleButtons.enabled}" />
+            
+            <tr>
+                <td>
+                    <h:commandButton value="Enable/Disable" action="#{toggleButtons.toggle}" />
+                </td>
+                <td>
+                     <p:fileUpload
+                    mode="advanced" id="emp_photos_upload1"
+                    fileUploadListener="#{fileUploadController.upload_emp_photo}"
+                    allowTypes="/(\.|\/)(PNG|png)$/" disabled="#{not toggleButtons.enabled}"
+                    auto="false" update="form" dragDropSupport="true" fileLimit="1"
+                    label="#{sprache.SelectButton}" uploadLabel="#{sprache.upload}" cancelLabel="#{sprache.cancel}" 
+                    invalidFileMessage="#{sprache.invalidPhotoMessage} &lt;br /&gt;">
+                    <f:attribute name="languageCode" value="#{localeManger.language}" />
+                </p:fileUpload>
+                </td>
+                 </tr>
+            
+           <tr>
+                            <td>Upload photo:</td>
+                            <td><ui:insert name="upload_emp_photos">
+                                    <ui:include src="../Bearbeitung/upload_emp_photos.xhtml"/>
+                                </ui:insert></td>
+                        </tr>
+            
+        </h:form>
+    </h:body>
+</html>

@@ -10,10 +10,10 @@
             <h:form id="footer-form">
                 <div style=" ; border-width:1.5px; border-color:black; 
                      border-style:solid; margin-bottom: 20px; margin-top: 20px"/>
-                <p:link value="#{sprache.start}" outcome="index?faces-redirect=true" id="default" style="margin-right:20px;"/>
-                <p:link value="#{sprache.emp}" outcome="mitarbeiter?faces-redirect=true" id="employee" style="margin-right:20px;"/>
-                <p:link value="#{sprache.imp}" outcome="impressum?faces-redirect=true" id="about" style="margin-right:20px;"/>
-                <h:link value="#{sprache.uGuide}" outcome="benutzerhandbuch?faces-redirect=true" target="Blank" id="uGide" style="margin-right:20px;"/>
+                <p:link value="#{sprache.start}" outcome="/index?faces-redirect=true" id="default" style="margin-right:20px;"/>
+                <p:link value="#{sprache.emp}" outcome="/mitarbeiter?faces-redirect=true&amp;includeViewParams=true" id="employee" style="margin-right:20px;"/>
+                <p:link value="#{sprache.imp}" outcome="/impressum?faces-redirect=true&amp;includeViewParams=true" id="about" style="margin-right:20px;"/>
+                <h:link value="#{sprache.uGuide}" outcome="/benutzerhandbuch?faces-redirect=true" target="Blank" id="uGide" style="margin-right:20px;"/>
             </h:form>
     </body>
 </html>

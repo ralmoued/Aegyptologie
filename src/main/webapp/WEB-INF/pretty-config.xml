@@ -3,19 +3,22 @@
                xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-    <!-- <url-mapping id="lang">
-        <pattern value="/#{langSwitcher.lang}" />
-    </url-mapping> -->
+    
         
      <!-- <url-mapping id="lang">
         <pattern value="/#{view.locale.language}/index" />
         <view-id value="/index.xhtml"/>
     </url-mapping> -->
-    
-    <url-mapping id="base">
-       <pattern value="#{localeManger.language}" />
+ 
+    <!--<url-mapping id="base">
+        <pattern value="/#{localeManger.language}"/>
     </url-mapping>
     
+    <url-mapping id="einzelMitarbeiter" parentId="base">
+        <pattern value="/mitarbeiter/#{firstname}_#{lastname}"/>
+        <view-id value="/einzelMitarbeiter.xhtml" /> 
+    </url-mapping>-->
+
      <url-mapping id="index">
         <pattern value="/index"/>
         <view-id value="/index.xhtml"/>
@@ -25,11 +28,11 @@
         <view-id value="/anmelden.xhtml" />
     </url-mapping>
     <url-mapping id="mitarbeiter">
-        <pattern value="/mitarbeiter"/>
+        <pattern value="/mitarbeiter/#{language}"/>
         <view-id value="/mitarbeiter.xhtml"/>
     </url-mapping> 
     <url-mapping id="impressum">           
-        <pattern value="/impressum"/>
+        <pattern value="/impressum/#{language}"/>
         <view-id value="/impressum.xhtml"/>
     </url-mapping>
     <url-mapping id="benutzerhandbuch">           
@@ -41,8 +44,8 @@
         <view-id value="/zuordnen.xhtml"/>
     </url-mapping>
     
-    <url-mapping id="einzelMitarbeiter">
-        <pattern value="/#{locale}/mitarbeiter/#{firstname}_#{lastname}"/>
+     <url-mapping id="einzelMitarbeiter">
+        <pattern value="/mitarbeiter/#{language}/#{firstname}_#{lastname}"/>
         <view-id value="/einzelMitarbeiter.xhtml" /> 
     </url-mapping>
     

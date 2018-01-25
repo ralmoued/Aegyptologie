@@ -74,8 +74,16 @@
 
                     <tr> 
                         <td>Aktivitäten:</td>
-                        <td><p:editor id="editor" value="#{mitarbeiter.kurzLebenslauf}" width="600"/></td>
+                        <td><p:editor id="editor" value="#{mitarbeiter.kurzLebenslauf}" width="600"/><br/></td>
                     </tr>
+
+                    <tr>
+                        <td>Upload photo:</td>
+                        <td><ui:insert name="upload_emp_photos" >
+                                <ui:include src="upload_emp_photos.xhtml"/>
+                            </ui:insert></td>
+                    </tr>
+
                     <tr>
                         <td></td>
                         <td><p:commandButton value="Aktualisieren" action="#{mitarbeiter.update}"  id="update"

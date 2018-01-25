@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="#{localeManger.language}" dir="#{localeManger.dir}"
+      lang="#{localeManger.language}"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Upload employees photos</title>
+        <h:outputStylesheet library="css" name="JSF-Styles.css"  /> 
+    </h:head>
+    <h:body>
+        <h:form id="form"> 
+            
+                <p:fileUpload
+                    mode="advanced" id="emp_photos_upload"
+                    fileUploadListener="#{fileUploadController.upload_emp_photo}"
+                    allowTypes="/(\.|\/)(PNG|png)$/"
+                    auto="false" update="form" dragDropSupport="true"
+                    label="#{sprache.SelectButton}" uploadLabel="#{sprache.upload}" cancelLabel="#{sprache.cancel}" 
+                    invalidFileMessage="#{sprache.invalidPhotoMessage} &lt;br /&gt;">
+                    <f:attribute name="emp_Id" value="#{mitarbeiter.id}" />
+                </p:fileUpload>
+
+                <p:growl id="English_messages" showDetail="true" showSummary="true"/>
+                <br/>
+
+                <h:outputText value="#{sprache.uploadMsg}"
+                              rendered="#{fileUploadController.fileSuccess eq true}"/>
+        </h:form>
+
+
+    </h:body>
+</html>

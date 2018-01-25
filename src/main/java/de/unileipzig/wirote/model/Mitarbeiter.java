@@ -9,10 +9,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 /**
  * Diese Klasse verwaltet den Mitarbeiter und bietet Methoden, um Mitarbeiter
@@ -110,8 +114,9 @@ public class Mitarbeiter implements Serializable {
     }
 
     /**
-     * define the id of the Mitarbeiter to be updated
-     * set the aktulle Mitarbeiter datei in den Felder (aus Datenbank)
+     * define the id of the Mitarbeiter to be updated set the aktulle
+     * Mitarbeiter datei in den Felder (aus Datenbank)
+     *
      * @param id
      * @return
      */
@@ -136,7 +141,7 @@ public class Mitarbeiter implements Serializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return "updateMitrbeiter?faces-redirect=true";
     }
 
@@ -340,9 +345,30 @@ public class Mitarbeiter implements Serializable {
         this.kurzLebenslauf = null;
     }
 
+    //Clear the form even in case error in validation
+    // recommended to be used. Better than reset()
+    // used in neuerMitarbeiter.xhtml in clear button
+    public void clearForm(ActionEvent event) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Application application = context.getApplication();
+        ViewHandler viewHandler = application.getViewHandler();
+        UIViewRoot viewRoot = viewHandler.createView(context, context
+                .getViewRoot().getViewId());
+        context.setViewRoot(viewRoot);
+        context.renderResponse(); //Optional
+
+        this.vorname = null;
+        this.nachname = null;
+        this.titel = null;
+        this.email = null;
+        this.telephon = null;
+        this.beaschaeftigungsDauer = null;
+        this.kurzLebenslauf = null;
+    }
+
     /**
-     * Zeig Nachricht, dass neuer Mitarbeiter hinzugefÃ¼gt ist
-    */
+     * //display msg telling that new mitarbeiter added successfully
+     */
     public void addMsg() {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Der Mitarbeiter ist erfolgreich hinzugefügt");
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -378,5 +404,4 @@ public class Mitarbeiter implements Serializable {
 //                + ", telephon=" + telephon + ", beaschaeftigungsDauer=" + beaschaeftigungsDauer
 //                + ", kurzLebenslauf=" + kurzLebenslauf + '}';
 //    }
-
 }

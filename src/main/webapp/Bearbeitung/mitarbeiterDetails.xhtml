@@ -30,8 +30,16 @@
                                     <td>
                                         <p:panelGrid columns="2">
                                             <f:facet name="header">
+                                                <!--
                                                 <p:graphicImage library="images/mitarbeiter" width="150px"
-                                                                name="#{mitarbeiter.finalName(mit.vorname)}+#{mitarbeiter.finalName(mit.nachname)}.png" />
+                                                                  name="#{mitarbeiter.finalName(mit.vorname)}+#{mitarbeiter.finalName(mit.nachname)}.png" />
+                                                
+                                                <p:graphicImage library="#{sourceDirectory.empPhotoFolder}" width="150px"
+                                                                name="#{mitarbeiter.id}.png" />
+                                                -->
+                                                <p:graphicImage value="#{sourceDirectory.image}" width="150px">
+                                                    <f:param name="filename" value="#{mitarbeiter.id}.png" />
+                                                </p:graphicImage>
                                             </f:facet>
 
                                             <h:outputText value="Name:" />
@@ -49,19 +57,19 @@
                                             <h:outputText value="#{mit.beaschaeftigungsDauer}" 
                                                           rendered="#{!empty mit.beaschaeftigungsDauer}" escape="false"/>
 
-                                            <h:outputText value="AktivitÃ¤t:" rendered="#{!empty mit.kurzLebenslauf}"/>
+                                            <h:outputText value="AktivitÃƒÂ¤t:" rendered="#{!empty mit.kurzLebenslauf}"/>
                                             <h:outputText value="#{mit.kurzLebenslauf}" 
                                                           rendered="#{!empty mit.kurzLebenslauf}" escape="false"/>
                                         </p:panelGrid>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><p:commandButton value="LÃ¶schen" id="del" style="width: 120px"
+                                    <td><p:commandButton value="LÃƒÂ¶schen" id="del" style="width: 120px"
                                                          action="#{mitarbeiter.deleteAction(mit.id)}" 
                                                          actionListener="#{mitarbeiter.delMsg()}" update="@form" />
                                         <p:commandButton value="Editieren" id="edit" style="width: 120px"
                                                          action="#{mitarbeiter.setAktualisierung(mit.id)}"/>
-                                        <p:commandButton value="ZurÃ¼ck" id="back"
+                                        <p:commandButton value="ZurÃƒÂ¼ck" id="back"
                                                          action="mitarbeiter?faces-redirect=true" style="width:120px"/>
                                     </td>
                                 </tr>
